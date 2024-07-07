@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Name Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="userName" placeholder="Enter your name">
+        <button onclick="generateRandomName()">Generate Random Name</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        let names = ['Alice', 'Bob', 'Charlie', 'David', 'Emma', 'Frank', 'Grace', 'Henry'];
+
+        function generateRandomName() {
+            const userName = document.getElementById('userName').value.trim().toLowerCase();
+            const availableNames = names.filter(name => name.toLowerCase() !== userName);
+
+            if (availableNames.length === 0) {
+                document.getElementById('result').textContent = "No names available";
+                return;
+            }
+
+            const randomIndex = Math.floor(Math.random() * availableNames.length);
+            const randomName = availableNames[randomIndex];
+            document.getElementById('result').textContent = randomName;
+
+            // Remove the generated name from the original list
+            names = names.filter(name => name.toLowerCase() !== randomName.toLowerCase());
+        }
+    </script>
+</body>
+</html>
